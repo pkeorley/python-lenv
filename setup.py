@@ -3,12 +3,6 @@
 # This source code is licensed under the MIT license found in the LICENSE
 # file in the root directory of this source tree.
 
-from lenv import (
-    __version__,
-    __author__,
-    __description__
-)
-
 from setuptools import setup, find_packages
 
 
@@ -20,11 +14,11 @@ def get_long_description() -> str:
 
 setup(
     name="lenv",
-    author=__author__,
+    author="pkeorley",
     author_email='pkeorley@gmail.com',
 
     url='https://github.com/pkeorley/lenv',
-    version=__version__,
+    version="0.1.0",
 
     license='MIT',
     license_files=['LICENSE'],
@@ -33,7 +27,7 @@ setup(
     packages=find_packages(exclude=['.venv']),
     install_requires=["python-dotenv==1.0.1"],
 
-    description=__description__,
+    description="Quickly and efficiently load environment variables into a class",
     long_description=get_long_description(),
     long_description_content_type='text/markdown'
 )
