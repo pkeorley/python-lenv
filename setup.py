@@ -27,7 +27,7 @@ setup(
     version=__version__,
 
     license='MIT',
-    licence_files=['LICENSE'],
+    license_files=['LICENSE'],
 
     python_requires='>=3.10',
     packages=find_packages(exclude=['.venv']),
