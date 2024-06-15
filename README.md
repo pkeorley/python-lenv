@@ -18,7 +18,7 @@ This package allows you to quickly, efficiently and conveniently load environmen
 To install/update the `lenv` package, you need to use `pip`
 
 ```bash
-python3 -m pip install -U lenv
+python3 -m pip install -U python-lenv
 ```
 
     
