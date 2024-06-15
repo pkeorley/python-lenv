@@ -13,7 +13,7 @@ def get_long_description() -> str:
 
 
 setup(
-    name="lenv",
+    name="python-lenv",
     author="pkeorley",
     author_email='pkeorley@gmail.com',
 
