@@ -33,6 +33,7 @@ def _load_dotenv(
 
     if metadata is None:
         metadata = MetaDataUtils.default_metadata()
+    MetaDataUtils.implement_required_keys(metadata)
 
     metadata_load_dotenv = metadata["load_dotenv"]
     return load_dotenv(
