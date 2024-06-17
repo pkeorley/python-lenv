@@ -49,7 +49,10 @@ class Meta(type):
     def __new__(cls, name, bases, dct):
         heir = super().__new__(cls, name, bases, dct)
 
-        _load_dotenv()
+        metadata: t.Optional[t.Dict[t.Hashable, t.Any]] = None
+        if hasattr(heir, "metadata"):
+            metadata = getattr(heir, "metadata")
+        _load_dotenv(metadata=metadata)
 
         for key, type_ in heir.__annotations__.items():
             value = None
