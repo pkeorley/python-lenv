@@ -4,9 +4,11 @@
 # file in the root directory of this source tree.
 
 import typing as t
+import warnings
 from os import getenv, PathLike
 
 from dotenv import load_dotenv
+from lenv.utils import deserialize
 
 
 class MetaDataUtils:
@@ -56,20 +58,26 @@ class Meta(type):
         _load_dotenv(metadata=metadata)
 
         for key, type_ in heir.__annotations__.items():
-            value = None
 
+            value: t.Optional[t.Any] = None
             if hasattr(heir, key):
                 value = getattr(heir, key)
 
-            key = value or key
-
-            dotenv_value = getenv(key)
+            dotenv_value = getenv(value or key)
+            if dotenv_value is None:
+                warnings.warn("The key '%s' will return the value 'None', since it is not found in the env variables" % key)
 
             try:
-                dotenv_value = type_(dotenv_value)
-            except Exception:
-                raise ValueError(f"Failed to convert the environment variable '{key}' "
-                                 f"with value '{dotenv_value}' to type '{type_.__name__}'")
+                dotenv_value = deserialize(
+                    value=dotenv_value,
+                    type=type_
+                )
+            except TypeError:
+                raise TypeError("Unable to deserialize '{k}' with value '{v}' to type '{t}'".format(
+                    k=key,
+                    v=dotenv_value,
+                    t=type_.__name__
+                ))
 
             setattr(heir, key, dotenv_value)
 
