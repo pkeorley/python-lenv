@@ -4,28 +4,44 @@
 # file in the root directory of this source tree.
 
 import typing as t
-from os import getenv
+from os import getenv, PathLike
 
 from dotenv import load_dotenv
 
 
-DEFAULT_DOTENV_FILE = ".env"
+class MetaDataUtils:
+    @staticmethod
+    def default_metadata() -> t.Dict[t.Hashable, t.Any]:
+        return MetaDataUtils.implement_required_keys({})
+
+    @staticmethod
+    def implement_required_keys(d: t.Dict[t.Hashable, t.Any]) -> t.Dict[t.Hashable, t.Any]:
+        if "load_dotenv" not in d:
+            d["load_dotenv"] = {}
+        return d
 
 
-def _load_dotenv(dotenv_path: str = None):
-    if not hasattr(_load_dotenv, "already_loaded"):
-        _load_dotenv.already_loaded = []
+def _load_dotenv(
+    dotenv_path: t.Optional[t.Union[str, 'PathLike[str]']] = None,
+    stream: t.Optional[t.IO[str]] = None,
+    verbose: bool = False,
+    override: bool = False,
+    interpolate: bool = True,
+    encoding: t.Optional[str] = "utf-8",
+    metadata: t.Dict[t.Hashable, t.Any] = None,
+) -> bool:
 
-    if dotenv_path in _load_dotenv.already_loaded:
-        return
+    if metadata is None:
+        metadata = MetaDataUtils.default_metadata()
 
-    if dotenv_path is None:
-        dotenv_path = DEFAULT_DOTENV_FILE
-
-    _load_dotenv.already_loaded.append(dotenv_path)
-
-    load_dotenv(
-        dotenv_path=dotenv_path,
+    metadata_load_dotenv = metadata["load_dotenv"]
+    return load_dotenv(
+        dotenv_path=metadata_load_dotenv.get("dotenv_path", dotenv_path),
+        stream=metadata_load_dotenv.get("stream", stream),
+        verbose=metadata_load_dotenv.get("verbose", verbose),
+        override=metadata_load_dotenv.get("override", override),
+        interpolate=metadata_load_dotenv.get("interpolate", interpolate),
+        encoding=metadata_load_dotenv.get("encoding", encoding),
     )
 
 
