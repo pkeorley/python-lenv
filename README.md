@@ -1,5 +1,5 @@
 
-# lenv
+# python-lenv
 
 Welcome to the **lenv** package page!
 This package allows you to quickly, efficiently and conveniently load environment variables into a *class*!
@@ -11,7 +11,8 @@ This package allows you to quickly, efficiently and conveniently load environmen
  
 - [x] Loading variables into a class by variable name
 - [x] Loading variables into a class by variable value
-- [ ] Configurability 
+- [ ] Configurability using `metadata` 
+- [ ] Documentation
 
 ## Installation
 
@@ -25,7 +26,7 @@ python3 -m pip install -U python-lenv
 ## Usage/Examples
 
 First, we'll look at the structure of your project, which should look like this
-```
+```bash
 my-awesome-project
 ├── .env
 └── main.py
@@ -33,23 +34,23 @@ my-awesome-project
 
 
 Let's go to the file where the variables will be loaded into your class. We will name it `.env` and put the following content inside
-```
-/* .env */
+```dotenv
 KEY=value
 ```
 
 
 Let's move on to the most important thing, namely our python script where environment variables will be loaded from the `.env` file we created earlier
+
 ```python
 # main.py
 from lenv import Meta
 
 
-class Config(metaclass=Meta):
+class Environ(metaclass=Meta):
     KEY: str
 
 
-print(Config.KEY) # value
+print(Environ.KEY)  # value
 ```
 
 ## License
