@@ -11,7 +11,7 @@ This package allows you to quickly, efficiently and conveniently load environmen
  
 - [x] Loading variables into a class by variable name
 - [x] Loading variables into a class by variable value
-- [ ] Configurability using `metadata` 
+- [x] Configurability using `metadata` 
 - [ ] Documentation
 
 ## Installation
@@ -47,10 +47,29 @@ from lenv import Meta
 
 
 class Environ(metaclass=Meta):
-    KEY: str
-
-
-print(Environ.KEY)  # value
+    # Metadata allows you to configure the settings for loading environment variables.
+    metadata = {
+        # To see the available configurable options, you can view the `load_dotenv` function signature
+        # https://github.com/theskumar/python-dotenv/blob/main/src/dotenv/main.py#L321-L328
+        "load_dotenv": {
+            "dotenv_path": "./venv/.env",
+            ...: ...
+        }
+    }
+    
+    # Normal retrieval of a value. We can get the value of an environment variable
+    # using the name of the variable, this is the most common use case
+    NAME: str         
+    
+    # Also, we can get the environment variable not by the variable name, but by the value of the variable
+    Name: int = "NAME" # <- This is the key by which the value of the environment variable will be sufficient
+    
+    # We can use typehints as below to convert the received
+    # environment variable to a Python data type
+    AGE: int
+    
+    # We can also use other types, such as list
+    API_KEYS: list
 ```
 
 ## License
