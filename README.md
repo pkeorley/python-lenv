@@ -34,8 +34,11 @@ my-awesome-project
 
 
 Let's go to the file where the variables will be loaded into your class. We will name it `.env` and put the following content inside
+
 ```dotenv
-KEY=value
+NAME='John Doe'
+AGE=21
+API_KEYS='["01f95ec3-ab56-4272-a1fc-71cd6b94b720", "6d70c8a7-90f...", "..."]'
 ```
 
 
