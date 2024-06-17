@@ -3,6 +3,7 @@
 # This source code is licensed under the MIT license found in the LICENSE
 # file in the root directory of this source tree.
 
+import typing as t
 from os import getenv
 
 from dotenv import load_dotenv
@@ -12,7 +13,7 @@ DEFAULT_DOTENV_FILE = ".env"
 
 
 def _load_dotenv(dotenv_path: str = None):
-    if not hasattr(_load_dotenv, "_loaded_dotenv_files"):
+    if not hasattr(_load_dotenv, "already_loaded"):
         _load_dotenv.already_loaded = []
 
     if dotenv_path in _load_dotenv.already_loaded:
