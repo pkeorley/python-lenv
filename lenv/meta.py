@@ -58,7 +58,7 @@ class Meta(type):
         for key, type_ in heir.__annotations__.items():
             value = None
 
-            if hasattr(heir, key) and getattr(heir, key) is not None:
+            if hasattr(heir, key):
                 value = getattr(heir, key)
 
             key = value or key
