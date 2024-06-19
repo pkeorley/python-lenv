@@ -26,3 +26,26 @@ def deserialize(value: t.Optional[str], type: t.Type[T]) -> T:
         return json.loads(value)
 
     raise TypeError(f"Type {type} not supported")
+
+
+def _getattr(__o: object, __name: str) -> t.Optional[t.Any]:
+    """
+    This function, like the standard library function `getattr`, returns the specified attribute,
+    but without throwing an `AttributeError` if the attribute does not exist, in which case the output will be `None`
+
+    >>> o = object()
+    >>> print(getattr(o, "foo"))
+    Traceback (most recent call last):
+    File "<stdin>", line 1, in <module>
+    AttributeError: 'object' object has no attribute 'foo'
+
+    >>> print(_getattr(o, "foo"))
+    None
+
+    :param __o: Object
+    :param __name: Attribute name
+    :return: Attribute value
+    """
+    if hasattr(__o, __name):
+        return getattr(__o, __name)
+    return

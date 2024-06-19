@@ -8,7 +8,10 @@ import warnings
 from os import getenv, PathLike
 
 from dotenv import load_dotenv
-from lenv.utils import deserialize
+from lenv.utils import (
+    deserialize,
+    _getattr
+)
 
 
 class MetaDataUtils:
@@ -53,16 +56,12 @@ class Meta(type):
     def __new__(cls, name, bases, dct):
         heir = super().__new__(cls, name, bases, dct)
 
-        metadata: t.Optional[t.Dict[t.Hashable, t.Any]] = None
-        if hasattr(heir, "metadata"):
-            metadata = getattr(heir, "metadata")
+        metadata: t.Optional[t.Dict[t.Hashable, t.Any]] = _getattr(heir, "metadata")
         _load_dotenv(metadata=metadata)
 
         for key, type_ in heir.__annotations__.items():
 
-            value: t.Optional[t.Any] = None
-            if hasattr(heir, key):
-                value = getattr(heir, key)
+            value: t.Optional[t.Any] = _getattr(heir, key)
 
             dotenv_value = getenv(value or key)
             if dotenv_value is None:
