@@ -57,7 +57,15 @@ class Environ(metaclass=MetaEnvironmentVariablesLoader):
         "load_dotenv": {
             "dotenv_path": "./venv/.env",
             ...: ...
-        }
+        },
+        # Let's look at these parameters later...
+        "filters": {
+            "includes": [],
+            "excludes": [],
+        },
+        # If you enable this option, then if the variable is not found in the .env,
+        # it will throw an 'AttributeError' error instead of the usual warning
+        "raise_when_not_found": False,
     }
 
     # Normal retrieval of a value. We can get the value of an environment variable
@@ -65,7 +73,7 @@ class Environ(metaclass=MetaEnvironmentVariablesLoader):
     NAME: str
 
     # Also, we can get the environment variable not by the variable name, but by the value of the variable
-    Name: int = "NAME"  # <- This is the key by which the value of the environment variable will be sufficient
+    WE_CAN_PUT_THERE_WHAT_YOU_WANT: int = "NAME"  # <- This is the key by which the value of the environment variable will be sufficient
 
     # We can use typehints as below to convert the received
     # environment variable to a Python data type
@@ -73,6 +81,41 @@ class Environ(metaclass=MetaEnvironmentVariablesLoader):
 
     # We can also use other types, such as list
     API_KEYS: list
+
+
+print(Environ.NAME)         # "John Doe"
+print(Environ.AGE)          # 21
+print(Environ.API_KEYS[0])     # "01f95ec3-ab56-4272-a1fc-71cd6b94b720"
+```
+
+In addition, we can load into the class only those variables that we have selected, for example, only those ending in `api_keys`
+
+```py
+import os
+os.environ["NAME"] = "John Doe"
+os.environ["OPENAI_API_KEYS"] = '["...", "...", "..."]'
+os.environ["SOMEONE_ELSE_API_KEYS"] = '["..."]'
+
+from lenv import MetaEnvironmentVariablesLoader
+
+
+class ApiKeys(metaclass=MetaEnvironmentVariablesLoader):
+    metadata = {
+        # There are two filters, one by `includes` and the other by `excludes`. 
+        # For filtering, the regex language is used
+        "filters": {
+            "includes": [r"\w*_API_KEYS"],
+            "excludes": [],
+        }
+    }
+
+    OPENAI_API_KEYS: list
+    SOMEONE_ELSE_API_KEYS: list
+    NAME: str
+
+assert ApiKeys.OPENAI_API_KEYS is not None          # Correct
+assert ApiKeys.SOMEONE_ELSE_API_KEYS is not None    # Correct
+assert ApiKeys.NAME is not None                     # Error. And although the name exists in the environment variables, it will not load
 ```
 
 ## License
