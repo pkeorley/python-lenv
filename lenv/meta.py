@@ -17,12 +17,17 @@ from lenv.utils import (
 class MetaDataUtils:
     @staticmethod
     def default_metadata() -> t.Dict[t.Hashable, t.Any]:
-        return MetaDataUtils.implement_required_keys({})
+        return MetaDataUtils.add_required_keys({})
 
     @staticmethod
-    def implement_required_keys(d: t.Dict[t.Hashable, t.Any]) -> t.Dict[t.Hashable, t.Any]:
-        if "load_dotenv" not in d:
-            d["load_dotenv"] = {}
+    def add_required_keys(d: t.Dict[t.Hashable, t.Any]) -> t.Dict[t.Hashable, t.Any]:
+        def add(key: t.Hashable, value: t.Any) -> t.Dict[t.Hashable, t.Any]:
+            if key not in d:
+                d[key] = value
+            return d
+
+        add("dotenv_path", {})
+
         return d
 
 
@@ -39,7 +44,7 @@ def _load_dotenv(
     if metadata is None:
         metadata = MetaDataUtils.default_metadata()
     else:
-        MetaDataUtils.implement_required_keys(metadata)
+        MetaDataUtils.add_required_keys(metadata)
 
     metadata_load_dotenv = metadata["load_dotenv"]
     return load_dotenv(
