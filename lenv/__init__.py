@@ -3,7 +3,7 @@
 # This source code is licensed under the MIT license found in the LICENSE
 # file in the root directory of this source tree.
 
-from lenv.meta import Meta
+from lenv.meta import MetaEnvironmentVariablesLoader, Metadata
 
 
 __version__ = "0.2.0"
@@ -11,5 +11,6 @@ __description__ = "Quickly and efficiently load environment variables into a cla
 __author__ = "pkeorley"
 
 __all__ = [
-    "Meta",
+    "MetaEnvironmentVariablesLoader",
+    "Metadata",
 ]
