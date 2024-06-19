@@ -63,7 +63,8 @@ class MetaEnvironmentVariablesLoader(type):
         _load_dotenv(metadata=metadata)
 
         for key, type_ in heir.__annotations__.items():
-            def check() -> bool:
+
+            def check(k: str) -> bool:
                 """
                 Check if the key should be loaded
                 :return: True if the key should be loaded, False otherwise
@@ -71,17 +72,17 @@ class MetaEnvironmentVariablesLoader(type):
                 includes = [re.compile(s) for s in metadata["filters"].get("includes", [])]
                 excludes = [re.compile(s) for s in metadata["filters"].get("excludes", [])]
 
-                if includes and not any(i.match(key) for i in includes):
+                if includes and not any(i.match(k) for i in includes):
                     return False
-                if excludes and any(e.match(key) for e in excludes):
+                if excludes and any(e.match(k) for e in excludes):
                     return False
                 return True
 
-            if not check():
+            value: t.Optional[t.Any] = _getattr(heir, key)
+
+            if not check(value or key):
                 setattr(heir, key, None)
                 continue
-
-            value: t.Optional[t.Any] = _getattr(heir, key)
 
             dotenv_value = getenv(value or key)
             if dotenv_value is None:
