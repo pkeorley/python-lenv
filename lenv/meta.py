@@ -30,7 +30,7 @@ def _load_dotenv(
     override: bool = False,
     interpolate: bool = True,
     encoding: t.Optional[str] = "utf-8",
-    metadata: t.Dict[t.Hashable, t.Any] = None,
+    metadata: t.Optional[t.Dict[t.Hashable, t.Any]] = None,
 ) -> bool:
 
     if metadata is None:
