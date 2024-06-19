@@ -11,8 +11,5 @@ __description__ = "Quickly and efficiently load environment variables into a cla
 __author__ = "pkeorley"
 
 __all__ = [
-    "__version__",
-    "__description__",
-    "__author__",
     "Meta",
 ]
