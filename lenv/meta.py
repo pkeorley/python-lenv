@@ -52,7 +52,7 @@ def _load_dotenv(
     )
 
 
-class Meta(type):
+class MetaEnvironmentVariablesLoader(type):
     def __new__(cls, name, bases, dct):
         heir = super().__new__(cls, name, bases, dct)
 
