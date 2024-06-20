@@ -18,7 +18,7 @@ setup(
     author_email='pkeorley@gmail.com',
 
     url='https://github.com/pkeorley/python-lenv',
-    version="0.3.0",
+    version="0.3.1",
 
     license='MIT',
     license_files=['LICENSE'],
