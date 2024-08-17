@@ -50,7 +50,7 @@ from lenv import MetaEnvironmentVariablesLoader
 
 
 class Environ(metaclass=MetaEnvironmentVariablesLoader):
-    # Metadata allows you to configure the settings for loading environment variables.
+    # ABCMetadata allows you to configure the settings for loading environment variables.
     metadata = {
         # To see the available configurable options, you can view the `load_dotenv` function signature
         # https://github.com/theskumar/python-dotenv/blob/main/src/dotenv/main.py#L321-L328
