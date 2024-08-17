@@ -4,7 +4,10 @@ import typing
 
 from dotenv import dotenv_values
 
-from lenv.metadata import DefaultMetadata, ABCMetadata
+from .metadata import (
+    DefaultMetadata,
+    ABCMetadata,
+)
 
 
 _METADATA_CLASS_VAR_NAME = "meta"
