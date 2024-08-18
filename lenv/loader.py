@@ -24,9 +24,9 @@ class EnvironmentLoaderMeta(type):
         __metadata: ABCMetadata = _get_metadata(__new_class, default=DefaultMetadata())
         __dotenv_values = dotenv_values(__metadata.to_dict()["dotenv_path"])
 
-        annotations = inspect.get_annotations(__new_class)
+        __annotations = inspect.get_annotations(__new_class)
 
-        for k, _ in annotations.items():
+        for k, _ in __annotations.items():
             setattr(__new_class, k, __dotenv_values.get(k))
 
         return __new_class
