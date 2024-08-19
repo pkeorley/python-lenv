@@ -4,7 +4,7 @@ from abc import (
     ABC,
     abstractmethod,
 )
-from lenv.validators import (
+from .validators import (
     MetadataValidator,
     validate,
 )
