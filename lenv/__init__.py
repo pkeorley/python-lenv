@@ -15,6 +15,9 @@ from .validators import (
     MetadataValidator,
     validate,
 )
+from .config import (
+    Config,
+)
 
 __all__: typing.Sequence[str] = (
     'EnvironmentLoader',
@@ -26,4 +29,5 @@ __all__: typing.Sequence[str] = (
     'ABCValidator',
     'MetadataValidator',
     'validate',
+    'Config',
 )
