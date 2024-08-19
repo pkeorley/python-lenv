@@ -12,7 +12,12 @@ from .config import Config
 
 
 def _get_metadata(cls, default: typing.Optional[ABCMetadata] = None) -> typing.Optional[ABCMetadata]:
-    return getattr(cls, Config.METADATA_CLASS_VAR_NAME, default)
+    v = getattr(cls, Config.METADATA_CLASS_VAR_NAME, default)
+    if isinstance(v, ABCMetadata) is False:
+        raise ValueError(f"Value of '%s' variable must be an instance of %s, got %r" % (
+            Config.METADATA_CLASS_VAR_NAME, ABCMetadata, type(v)
+        ))
+    return v
 
 
 class EnvironmentLoaderMeta(type):
