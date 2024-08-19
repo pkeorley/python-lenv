@@ -46,12 +46,12 @@ class MetadataValidator(ABCValidator):
         if not isinstance(obj, typing.Mapping):
             self._throw("Object is not an instance of 'typing.Mapping'")
 
-        # obj: '_TMetadata'
+        obj: '_TMetadata'
 
-        # TODO: Better this validation
-        for k in ["dotenv_path"]:
+        required_keys: typing.Sequence[str] = ("dotenv_path",)
+        for k in required_keys:
             if k not in obj.keys():
-                raise RuntimeError(f"Key '%s' should exist in the metadata configuration" % k)
+                self._throw("Required key '%s' is missing in metadata config" % k)
 
         return True
 
