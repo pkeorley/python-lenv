@@ -8,13 +8,11 @@ from .metadata import (
     DefaultMetadata,
     ABCMetadata,
 )
-
-
-_METADATA_CLASS_VAR_NAME = "meta"
+from .config import Config
 
 
 def _get_metadata(cls, default: typing.Optional[ABCMetadata] = None) -> typing.Optional[ABCMetadata]:
-    return getattr(cls, _METADATA_CLASS_VAR_NAME, default)
+    return getattr(cls, Config.METADATA_CLASS_VAR_NAME, default)
 
 
 class EnvironmentLoaderMeta(type):
