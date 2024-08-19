@@ -1,4 +1,3 @@
-import collections
 import inspect
 import typing
 
@@ -24,12 +23,10 @@ class EnvironmentLoaderMeta(type):
     def __new__(cls, name, bases, dct):
         __new_class = type.__new__(cls, name, bases, dct)
 
-        __metadata: ABCMetadata = _get_metadata(__new_class, default=DefaultMetadata())
+        __metadata = _get_metadata(__new_class, default=DefaultMetadata())
+
         __dotenv_values = dotenv_values(__metadata.to_dict()["dotenv_path"])
-
-        __annotations = inspect.get_annotations(__new_class)
-
-        for k, _ in __annotations.items():
+        for k, _ in inspect.get_annotations(__new_class).items():
             setattr(__new_class, k, __dotenv_values.get(k))
 
         return __new_class
