@@ -60,7 +60,7 @@ class MetadataValidator(ABCValidator):
         if not isinstance(obj, typing.Mapping):
             self._throw("Object is not an instance of 'typing.Mapping'")
 
-        obj: '_TMetadata'
+        obj: typing.Mapping[str, typing.Any] = obj
 
         required_keys: typing.Sequence[str] = ("dotenv_path",)
         for k in required_keys:
