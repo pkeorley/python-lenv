@@ -7,12 +7,26 @@ from abc import (
 
 
 class ABCValidator(ABC):
+    """
+    Abstract base class for validating data
+    """
     @abstractmethod
     def is_valid(self, obj: object) -> bool:
+        """
+        Validates whether the provided object meets the metadata requirements.
+
+        :param obj: Object to validate
+        :return: Boolean indicating whether the object is valid
+        """
         ...
 
     @abstractmethod
     def throw(self) -> BaseException:
+        """
+        Additional function that can be used to raise an exception if the validation fails.
+
+        :return: An instance based on the `BaseException` class
+        """
         ...
 
 
@@ -83,12 +97,14 @@ class MetadataValidator(ABCValidator):
 
 
 def validate(validator: ABCValidator):
-    def decorator(func: typing.Callable):
-        """
-        This function should be used as decorator.
-        The main point is validating an output of function using specified validator
-        """
+    """
+    Decorator for validating.
 
+    This decorator takes an instance of `ABCValidator` and applies it to the decorated function.
+    :param validator: Instance of `ABCValidator`
+    :return: Decorator
+    """
+    def decorator(func: typing.Callable):
         @functools.wraps(func)
         def wrapper(*args, **kwargs):
             res = func(*args, **kwargs)

@@ -11,6 +11,13 @@ from .config import Config
 
 
 def _get_metadata(cls, default: typing.Optional[ABCMetadata] = None) -> typing.Optional[ABCMetadata]:
+    """
+    Gets the metadata from the class.
+
+    :param cls: Class to get metadata from
+    :param default: Default metadata when metadata is not found
+    :return: Metadata
+    """
     v = getattr(cls, Config.METADATA_CLASS_VAR_NAME, default)
     if isinstance(v, ABCMetadata) is False:
         raise ValueError(f"Value of '%s' variable must be an instance of %s, got %r" % (
@@ -20,6 +27,9 @@ def _get_metadata(cls, default: typing.Optional[ABCMetadata] = None) -> typing.O
 
 
 class EnvironmentLoaderMeta(type):
+    """
+    Metaclass for loading environment variables
+    """
     def __new__(cls, name, bases, dct):
         __new_class = type.__new__(cls, name, bases, dct)
 
@@ -33,4 +43,7 @@ class EnvironmentLoaderMeta(type):
 
 
 class EnvironmentLoader(metaclass=EnvironmentLoaderMeta):
+    """
+    Class for loading environment variables
+    """
     pass
