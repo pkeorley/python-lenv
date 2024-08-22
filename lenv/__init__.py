@@ -5,7 +5,7 @@ from .loader import (
     EnvironmentLoaderMeta
 )
 from .metadata import (
-    _TMetadata,
+    TMetadata,
     ABCMetadata,
     ConfigurableMetadata,
     DefaultMetadata,
@@ -22,7 +22,7 @@ from .config import (
 __all__: typing.Sequence[str] = (
     'EnvironmentLoader',
     'EnvironmentLoaderMeta',
-    '_TMetadata',
+    'TMetadata',
     'ABCMetadata',
     'ConfigurableMetadata',
     'DefaultMetadata',

@@ -10,7 +10,7 @@ from .validators import (
 )
 
 
-_TMetadata = typing.TypeVar("_TMetadata", bound=typing.Mapping[str, typing.Any])
+TMetadata = typing.TypeVar("TMetadata", bound=typing.Mapping[str, typing.Any])
 
 
 class ABCMetadata(ABC):
@@ -19,7 +19,7 @@ class ABCMetadata(ABC):
     """
 
     @abstractmethod
-    def to_dict(self) -> _TMetadata:
+    def to_dict(self) -> TMetadata:
         """
         Converts the default metadata into a dictionary format.
 
@@ -37,7 +37,7 @@ class DefaultMetadata(ABCMetadata):
     """
 
     @validate(MetadataValidator())
-    def to_dict(self) -> _TMetadata:
+    def to_dict(self) -> TMetadata:
         """
         Converts the default metadata into a dictionary format.
 
@@ -56,7 +56,7 @@ class ConfigurableMetadata(ABCMetadata):
         self._dotenv_path = dotenv_path
 
     @validate(MetadataValidator())
-    def to_dict(self) -> _TMetadata:
+    def to_dict(self) -> TMetadata:
         """
         Converts the default metadata into a dictionary format.
 
