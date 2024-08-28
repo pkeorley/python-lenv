@@ -1,11 +1,11 @@
 import typing
 
+from .types import TMetadata
 from .loader import (
     EnvironmentLoader,
     EnvironmentLoaderMeta
 )
 from .metadata import (
-    TMetadata,
     ABCMetadata,
     ConfigurableMetadata,
     DefaultMetadata,

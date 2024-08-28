@@ -5,6 +5,8 @@ from abc import (
     abstractmethod
 )
 
+from .types import TMetadata
+
 
 class ABCValidator(ABC):
     """
@@ -23,7 +25,7 @@ class ABCValidator(ABC):
     @abstractmethod
     def throw(self) -> BaseException:
         """
-        Additional function that can be used to raise an exception if the validation fails.
+        Helps to handle the exception in a generic way
 
         :return: An instance based on the `BaseException` class
         """
@@ -60,7 +62,7 @@ class MetadataValidator(ABCValidator):
         if not isinstance(obj, typing.Mapping):
             self._throw("Object is not an instance of 'typing.Mapping'")
 
-        obj: typing.Mapping[str, typing.Any] = obj
+        obj: TMetadata = obj
 
         required_keys: typing.Sequence[str] = ("dotenv_path",)
         for k in required_keys:

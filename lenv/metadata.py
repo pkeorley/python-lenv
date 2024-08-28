@@ -1,16 +1,14 @@
 import os
-import typing
 from abc import (
     ABC,
     abstractmethod,
 )
+
+from .types import TMetadata
 from .validators import (
     MetadataValidator,
     validate,
 )
-
-
-TMetadata = typing.TypeVar("TMetadata", bound=typing.Mapping[str, typing.Any])
 
 
 class ABCMetadata(ABC):
