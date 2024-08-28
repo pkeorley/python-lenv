@@ -1,35 +1,9 @@
 import functools
 import typing
-from abc import (
-    ABC,
-    abstractmethod
-)
 
+from .abc import ABCValidator
 from .types import TMetadata
 
-
-class ABCValidator(ABC):
-    """
-    Abstract base class for validating data
-    """
-    @abstractmethod
-    def is_valid(self, obj: object) -> bool:
-        """
-        Validates whether the provided object meets the metadata requirements.
-
-        :param obj: Object to validate
-        :return: Boolean indicating whether the object is valid
-        """
-        ...
-
-    @abstractmethod
-    def throw(self) -> BaseException:
-        """
-        Helps to handle the exception in a generic way
-
-        :return: An instance based on the `BaseException` class
-        """
-        ...
 
 
 class MetadataValidator(ABCValidator):

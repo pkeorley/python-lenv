@@ -1,29 +1,11 @@
 import os
-from abc import (
-    ABC,
-    abstractmethod,
-)
 
 from .types import TMetadata
+from .abc import ABCMetadata
 from .validators import (
     MetadataValidator,
     validate,
 )
-
-
-class ABCMetadata(ABC):
-    """
-    Represents the abstract base class for metadata.
-    """
-
-    @abstractmethod
-    def to_dict(self) -> TMetadata:
-        """
-        Converts the default metadata into a dictionary format.
-
-        :return: A dictionary representation of the metadata
-        """
-        ...
 
 
 class DefaultMetadata(ABCMetadata):
