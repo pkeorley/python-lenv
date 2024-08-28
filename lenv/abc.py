@@ -3,7 +3,7 @@ from abc import (
     abstractmethod
 )
 
-from .metadata import TMetadata
+from .types import TMetadata
 
 
 class ABCThrowable(ABC):
