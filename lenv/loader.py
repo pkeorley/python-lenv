@@ -33,7 +33,7 @@ class EnvironmentLoaderMeta(type):
     def __new__(cls, name, bases, dct):
         __new_class = type.__new__(cls, name, bases, dct)
 
-        __metadata = _get_metadata(__new_class, default=DefaultMetadata())
+        __metadata: ABCMetadata = _get_metadata(__new_class, default=DefaultMetadata())
 
         __dotenv_values = dotenv_values(__metadata.to_dict()["dotenv_path"])
         for k in inspect.get_annotations(__new_class).keys():
