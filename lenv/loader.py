@@ -8,6 +8,7 @@ from .metadata import (
     ABCMetadata,
 )
 from .config import Config
+from .errors import LenvError
 
 
 def _get_metadata(cls, default: typing.Optional[ABCMetadata] = None) -> typing.Optional[ABCMetadata]:
@@ -20,7 +21,7 @@ def _get_metadata(cls, default: typing.Optional[ABCMetadata] = None) -> typing.O
     """
     v = getattr(cls, Config.METADATA_CLASS_VAR_NAME, default)
     if isinstance(v, ABCMetadata) is False:
-        raise ValueError(f"Value of '%s' variable must be an instance of %s, got %r" % (
+        raise LenvError(f"Value of '%s' variable must be an instance of %s, got %r" % (
             Config.METADATA_CLASS_VAR_NAME, ABCMetadata, type(v)
         ))
     return v

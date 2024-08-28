@@ -1,0 +1,2 @@
+class LenvError(Exception):
+    pass

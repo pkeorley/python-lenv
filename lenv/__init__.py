@@ -23,6 +23,9 @@ from .validators import (
     MetadataValidator,
     validate,
 )
+from .errors import (
+    LenvError,
+)
 
 __all__: typing.Sequence[str] = (
     'ABCThrowable',
@@ -36,4 +39,5 @@ __all__: typing.Sequence[str] = (
     'DefaultMetadata',
     'MetadataValidator',
     'validate',
+    'LenvError',
 )

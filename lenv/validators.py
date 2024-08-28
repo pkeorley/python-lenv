@@ -3,7 +3,7 @@ import typing
 
 from .abc import ABCValidator
 from .types import TMetadata
-
+from .errors import LenvError
 
 
 class MetadataValidator(ABCValidator):
@@ -69,7 +69,7 @@ class MetadataValidator(ABCValidator):
         :raises RuntimeError:
             When called, this method raises an exception with the stored `_throw_msg`.
         """
-        raise RuntimeError(self._throw_msg)
+        raise LenvError(self._throw_msg)
 
 
 def validate(validator: ABCValidator):
