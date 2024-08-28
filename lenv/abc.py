@@ -32,7 +32,7 @@ class ABCMetadata(ABC):
         ...
 
 
-class ABCValidator(ABC, ABCThrowable):
+class ABCValidator(ABCThrowable, ABC):
     """
     Abstract base class for validating data
     """
