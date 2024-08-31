@@ -9,3 +9,4 @@ class Config:
 
     # The name of the variable in the class that contains the metadata
     METADATA_CLASS_VAR_NAME: str = "meta"
+    DEFAULT_DOTENV_FILE_PATH: str = ".env"

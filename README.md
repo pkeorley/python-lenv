@@ -41,7 +41,7 @@ import lenv
 
 class Config(lenv.EnvironmentLoader):
     # This configuration is not important, the default is used `lenv.DefaultMetadata` 
-    # which has a file path like .env in it. But for example, let's leave it
+    # which has a file path like .env in it (You can change it with lenv.Config.DEFAULT_DOTENV_FILE_PATH). But for example, let's leave it
     meta = lenv.ConfigurableMetadata(dotenv_path=".env")
     
     # These class variables will be used directly to access environment variables －O－

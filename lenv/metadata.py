@@ -2,6 +2,7 @@ import os
 
 from .types import TMetadata
 from .abc import ABCMetadata
+from .config import Config
 from .validators import (
     MetadataValidator,
     validate,
@@ -24,7 +25,7 @@ class DefaultMetadata(ABCMetadata):
         :return: A dictionary representation of the metadata
         """
         return {
-            "dotenv_path": ".env"
+            "dotenv_path": Config.DEFAULT_DOTENV_FILE_PATH
         }
 
 
