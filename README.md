@@ -1,13 +1,14 @@
-# python-lenv
+![python-lenv-logo](./docs/python-lenv-logo.png)
 
-Welcome to the **lenv** package page!
-This package allows you to quickly, efficiently and conveniently load environment variables into a *class*!
+----
 
+<center>Welcome to the <b>lenv</b> package page!</center>
+<center>Load environment variables into a class <b>quickly</b>, <b>efficiently</b> and<b>conveniently</b>!</center>
 
 ## Features
  
 - [x] Loading environment variables into class variables by variable name
-- [x] Configuring the loading of changes using a variable of class `meta`
+- [x] Configuring the package as you want
 
 ## Installation
 
